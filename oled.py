@@ -69,12 +69,13 @@ class SSD1331(object):
         self.width = OLED_WIDTH
         self.height = OLED_HEIGHT
         
-        self.dc_pin = Pin(DC_PIN, Pin.OUT)
         self.reset_pin = Pin(RESET_PIN, Pin.OUT)
         self.cs_pin = Pin(CS_PIN, Pin.OUT)
         
         # Initialize SPI
         self.spi = SPI(1)
+        # DC pin must be initialised after SPI initialization according to WaveShare
+        self.dc_pin = Pin(DC_PIN, Pin.OUT)
         
         # Buffer size
         self.buffer = bytearray(self.width * self.height * 2)
